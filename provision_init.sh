@@ -16,7 +16,7 @@ sudo yum -y upgrade
 
 # install dev tools
 sudo yum -y groupinstall "Development tools"
-sudo yum -y install git zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel scl-utils
+sudo yum -y install git zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel scl-utils nginx
 
 # install boost-devel
 if [ ! -e /etc/yum.repos.d/enetres.repo ]
