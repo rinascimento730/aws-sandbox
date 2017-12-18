@@ -169,3 +169,7 @@ then
     fi
 fi
 
+# auto boot Nginx
+sudo chkconfig nginx on
+sudo service nginx restart
+
