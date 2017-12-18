@@ -163,6 +163,9 @@ then
     sudo mkdir -p /usr/share/fonts/ipaexg00102/
     sudo cp ipaexg00102/ipaexg00102/*.ttf /usr/share/fonts/ipaexg00102
     fc-cache -fv
-    rm ~/.cache/matplotlib/fontList.py3k.cache
+    if [ -f ~/.cache/matplotlib/fontList.py3k.cache ]
+    then
+        rm ~/.cache/matplotlib/fontList.py3k.cache
+    fi
 fi
 
