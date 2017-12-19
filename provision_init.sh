@@ -78,6 +78,16 @@ then
     sudo ${PIP_AT}/bin/pip${PYTHON} install -U setuptools
 fi
 
+# install tornado
+sudo ${PIP_AT}/bin/pip${PYTHON} install tornado
+
+# install supervisor
+sudo ${PIP_AT}/bin/pip${PYTHON} install supervisor
+if [ ! -f /etc/supervisord.conf ]
+then
+    sudo echo_supervisord_conf > /etc/supervisord.conf
+fi
+
 # install beautifulsoup
 sudo ${PIP_AT}/bin/pip${PYTHON} install beautifulsoup4
 
@@ -171,5 +181,8 @@ fi
 
 # auto boot Nginx
 sudo chkconfig nginx on
+sudo mv -f /vagrant/nginx/nginx.conf /etc/nginx/nginx.conf
+sudo mv -f /vagrant/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+
 sudo service nginx restart
 
