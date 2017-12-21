@@ -16,7 +16,9 @@ sudo yum -y upgrade
 
 # install dev tools
 sudo yum -y groupinstall "Development tools"
-sudo yum -y install git zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel scl-utils nginx
+sudo rpm -Uvh http://vault.centos.org/6.5/SCL/x86_64/scl-utils/scl-utils-20120927-11.el6.centos.alt.x86_64.rpm
+sudo rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+sudo yum -y install git zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel nginx
 
 # install boost-devel
 if [ ! -e /etc/yum.repos.d/enetres.repo ]
@@ -66,7 +68,7 @@ fi
 # install pip3
 if [ ! -e ${PIP_AT}/bin/pip${PYTHON} ]
 then
-	cd ${SRC_TO}
+    cd ${SRC_TO}
     # install pip
     sudo curl -O https://bootstrap.pypa.io/get-pip.py
     sudo ${PYTHON_AT}/bin/python${PYTHON} get-pip.py
@@ -76,16 +78,6 @@ then
 
     # install distribute
     sudo ${PIP_AT}/bin/pip${PYTHON} install -U setuptools
-fi
-
-# install tornado
-sudo ${PIP_AT}/bin/pip${PYTHON} install tornado
-
-# install supervisor
-sudo ${PIP_AT}/bin/pip${PYTHON} install supervisor
-if [ ! -f /etc/supervisord.conf ]
-then
-    sudo echo_supervisord_conf > /etc/supervisord.conf
 fi
 
 # install beautifulsoup
@@ -179,10 +171,27 @@ then
     fi
 fi
 
+# install tornado
+sudo ${PIP_AT}/bin/pip${PYTHON} install tornado
+
+# install supervisor (in python2.7)
+sudo pip install supervisor
+sudo cp -rf /vagrant/supervisor/* /etc/
+
+if [ ! -f /etc/rc.d/init.d/supervisord ]
+then
+    sudo cp -f /vagrant/init.d/supervisord /etc/rc.d/init.d/supervisord
+    sudo chmod 755 /etc/rc.d/init.d/supervisord
+    sudo chkconfig --add supervisord
+    sudo service supervisord start
+fi
+
+supervisorctl reload
+
 # auto boot Nginx
 sudo chkconfig nginx on
-sudo mv -f /vagrant/nginx/nginx.conf /etc/nginx/nginx.conf
-sudo mv -f /vagrant/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+sudo cp -f /vagrant/nginx/nginx.conf /etc/nginx/nginx.conf
+sudo cp -f /vagrant/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
 sudo service nginx restart
 
