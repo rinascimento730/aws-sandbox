@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <title>{% block title %}{% end %}</title>
+
+      <!-- CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+      <link href="{{ static_url('style_template.css') }}" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ reverse_url('index') }}">Home</a>
+                    <a class="navbar-brand" href="{{ reverse_url('python') }}">Python</a>
+                    <a class="navbar-brand" href="{{ reverse_url('php') }}">PHP</a>
+                    <a class="navbar-brand" href="{{ reverse_url('ruby') }}">Ruby</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="jumbotron">
+            <div class="container">
+                {% block content %}
+                {% end %}
+            </div>
+        </div>
+
+        <div class="container">
+            <footer>
+                <p>&copy; Company 2017</p>
+            </footer>
+        </div>
+
+        <!-- JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    </body>
+</html>
