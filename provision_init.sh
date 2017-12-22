@@ -184,9 +184,9 @@ then
     sudo chmod 755 /etc/rc.d/init.d/supervisord
     sudo chkconfig --add supervisord
     sudo service supervisord start
+else
+    supervisorctl restart
 fi
-
-supervisorctl reload
 
 # auto boot Nginx
 sudo chkconfig nginx on
