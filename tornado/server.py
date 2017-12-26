@@ -21,6 +21,7 @@ class Application(tornado.web.Application):
             url(r'/python/', PythonHandler, name='python'),
             url(r'/php/', PHPHandler, name='php'),
             url(r'/ruby/', RubyHandler, name='ruby'),
+            url(r'.*', BaseHandler, name='error_404'),
         ]
 
         settings = dict(

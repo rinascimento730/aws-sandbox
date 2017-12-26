@@ -1,18 +1,20 @@
 # coding: utf-8
+from __future__ import absolute_import
+from . import BaseHandler
 import tornado.web
 
-class IndexHandler(tornado.web.RequestHandler):
+class IndexHandler(BaseHandler):
     def get(self):
         self.render('index.html')
 
-class PythonHandler(tornado.web.RequestHandler):
+class PythonHandler(BaseHandler):
     def get(self):
         self.render('python.html')
 
-class PHPHandler(tornado.web.RequestHandler):
+class PHPHandler(BaseHandler):
     def get(self):
         self.render('php.html')
 
-class RubyHandler(tornado.web.RequestHandler):
+class RubyHandler(BaseHandler):
     def get(self):
         self.render('ruby.html')
