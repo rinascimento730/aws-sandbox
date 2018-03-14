@@ -16,7 +16,7 @@ class Application(tornado.web.Application):
     def __init__(self):
         routers = [
             url(r'/', MainHandler, name='main'),
-            url(r'/sub/', SubHandler, name='sub'),
+            url(r'/sub(|/)', SubHandler, name='sub'),
             url(r'/index/', IndexHandler, name='index'),
             url(r'/python/', PythonHandler, name='python'),
             url(r'/php/', PHPHandler, name='php'),

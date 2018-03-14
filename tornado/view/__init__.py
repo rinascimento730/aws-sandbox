@@ -3,7 +3,7 @@ from __future__ import absolute_import
 import tornado.web
 
 class BaseHandler(tornado.web.RequestHandler):
-    def get(self):
+    def get(self, url):
         raise tornado.web.HTTPError(404)
 
     # self.write_errorをオーバーライド
